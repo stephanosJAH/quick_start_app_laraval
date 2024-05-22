@@ -28,8 +28,8 @@
             </select>
           </search-filter>
           <Link class="btn-indigo" :href="`${baseUrl}/users/create`">
-            <span>Create</span>
-            <span class="hidden md:inline">&nbsp;User</span>
+            <span>Crear</span>
+            <span class="hidden md:inline">&nbsp;Usuarios</span>
           </Link>
         </div>
         <div class="bg-white rounded-md shadow overflow-x-auto">

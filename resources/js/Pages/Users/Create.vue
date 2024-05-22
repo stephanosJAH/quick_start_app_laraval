@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     store() {
-      this.form.post('/users')
+      this.form.post(baseUrl + '/users')
     },
   },
 }
