@@ -8,19 +8,16 @@
         :type="type" 
         :value="modelValue" 
         @input="$emit('update:modelValue', $event.target.value)" />
-    
     <!-- <v-text-field
-       :id="id"
-        v-model="first"
         color="primary"
-        :label="label"
         variant="underlined"
         ref="input" 
         v-bind="{ ...$attrs, class: null }" 
-        class="form-input" :class="{ error: error }" 
+        :id="id"
+        :label="label"
+        :class="{ error: error }" 
         :type="type" 
-        :value="modelValue" 
-        @input="$emit('update:modelValue', $event.target.value)"
+        :value="modelValue"
       ></v-text-field> -->
     <div v-if="error" class="form-error">{{ error }}</div>
   </div>

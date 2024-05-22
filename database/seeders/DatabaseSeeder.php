@@ -19,22 +19,22 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'account_id' => $account->id,
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'email' => 'johndoe@example.com',
+            'first_name' => 'Esteban',
+            'last_name' => 'Campos',
+            'email' => 'admin@admin.com',
             'password' => 'secret',
             'owner' => true,
         ]);
 
         User::factory(5)->create(['account_id' => $account->id]);
 
-        $organizations = Organization::factory(100)
+        $organizations = Organization::factory(10)
             ->create(['account_id' => $account->id]);
 
-        Contact::factory(100)
-            ->create(['account_id' => $account->id])
-            ->each(function ($contact) use ($organizations) {
-                $contact->update(['organization_id' => $organizations->random()->id]);
-            });
+        // Contact::factory(100)
+        //     ->create(['account_id' => $account->id])
+        //     ->each(function ($contact) use ($organizations) {
+        //         $contact->update(['organization_id' => $organizations->random()->id]);
+        //     });
     }
 }

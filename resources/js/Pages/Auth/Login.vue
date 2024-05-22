@@ -1,41 +1,74 @@
 <template>
-  <Head title="Login" />
-  <div class="flex items-center justify-center p-6 min-h-screen bg-indigo-800">
-    <div class="w-full max-w-md">
-      <logo class="block mx-auto w-full max-w-xs fill-white" height="50" />
-      <form class="mt-8 bg-white rounded-lg shadow-xl overflow-hidden" @submit.prevent="login">
-        <div class="px-10 py-12">
-          <h1 class="text-center text-3xl font-bold">Welcome Back!</h1>
-          <div class="mt-6 mx-auto w-24 border-b-2" />
-          <text-input v-model="form.email" :error="form.errors.email" class="mt-10" label="Email" type="email" autofocus autocapitalize="off" />
-          <text-input v-model="form.password" :error="form.errors.password" class="mt-6" label="Password" type="password" />
-          <label class="flex items-center mt-6 select-none" for="remember">
-            <input id="remember" v-model="form.remember" class="mr-1" type="checkbox" />
-            <span class="text-sm">Remember Me</span>
-          </label>
-        </div>
-        <div class="flex px-10 py-4 bg-gray-100 border-t border-gray-100">
-          <loading-button :loading="form.processing" class="btn-indigo ml-auto" type="submit">Login</loading-button>
-        </div>
-      </form>
-    </div>
-  </div>
+    <v-container class="flex h-screen items-center justify-center">
+        <v-row justify="center" class="flex flex-col  items-center">
+            <div>
+                <Logo width="48"  height="48" />
+            </div>
+            <v-col cols="12" sm="8" md="6">
+                <v-card>
+                    <v-card-title class="text-center">
+                        Login
+                    </v-card-title>
+                    <v-card-text>
+                        <v-form @submit.prevent="login">
+                            <v-text-field
+                                v-model="form.email"
+                                label="Email"
+                                variant="underlined"
+                                required
+                            >
+                                <template v-slot:prepend>
+                                    <IconUser />
+                                </template>
+                            </v-text-field>
+                            <v-text-field
+                                v-model="form.password"
+                                label="Password"
+                                variant="underlined"
+                                required
+                            >
+                                <template v-slot:prepend>
+                                    <IconLock />
+                                </template>
+                            </v-text-field>
+                            <v-checkbox 
+                                v-model="form.remember"
+                                label="Recordarme"
+                                color="red"
+                                value="red"
+                                hide-details
+                            >
+                            </v-checkbox>
+                            <loading-button 
+                                :loading="form.processing" 
+                                class="btn-indigo ml-auto" 
+                                type="submit"
+                            >
+                                Ingresar
+                            </loading-button>
+                        </v-form>
+                        <v-divider class="my-4"></v-divider>
+                    </v-card-text>
+                </v-card>
+            </v-col>
+        </v-row>
+    </v-container>
 </template>
 
 <script>
-import { Head } from '@inertiajs/vue3'
-import Logo from '@/Shared/Logo.vue'
-import TextInput from '@/Shared/TextInput.vue'
+import Logo from '@/Shared/Logo.vue';
+import IconUser from '@/Shared/Icons/User.vue';
+import IconLock from '@/Shared/Icons/Lock.vue';
 import LoadingButton from '@/Shared/LoadingButton.vue'
 
 export default {
-  components: {
-    Head,
-    LoadingButton,
-    Logo,
-    TextInput,
-  },
-  data() {
+    components: {
+        Logo,
+        IconUser,
+        IconLock,
+        LoadingButton
+    },
+    data() {
     return {
       form: this.$inertia.form({
         email: 'johndoe@example.com',
@@ -46,8 +79,8 @@ export default {
   },
   methods: {
     login() {
-      this.form.post('/login')
+      this.form.post('/app-quick-start-inertia-vue/public/login')
     },
   },
-}
+};
 </script>

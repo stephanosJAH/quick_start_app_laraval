@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 
-class OrganizationsController extends Controller
+class StudyController extends Controller
 {
     public function index(): Response
     {
-        return Inertia::render('Organizations/Index', [
+        return Inertia::render('Studies/Index', [
             'filters' => Request::all('search', 'trashed'),
-            'organizations' => Auth::user()->account->organizations()
+            'studies' => Auth::user()->account->organizations()
                 ->orderBy('name')
                 ->filter(Request::only('search', 'trashed'))
                 ->paginate(10)
@@ -33,7 +33,7 @@ class OrganizationsController extends Controller
 
     public function create(): Response
     {
-        return Inertia::render('Organizations/Create');
+        return Inertia::render('Studies/Create');
     }
 
     public function store(): RedirectResponse
@@ -56,7 +56,7 @@ class OrganizationsController extends Controller
 
     public function edit(Organization $organization): Response
     {
-        return Inertia::render('Organizations/Edit', [
+        return Inertia::render('Studies/Edit', [
             'organization' => [
                 'id' => $organization->id,
                 'name' => $organization->name,

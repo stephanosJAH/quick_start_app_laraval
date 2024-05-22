@@ -2,15 +2,22 @@ import '../css/app.css'
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 
+import 'vuetify/dist/vuetify.min.css';
+import 'vuetify/dist/vuetify.min.js';
+
+import { createVuetify } from 'vuetify'
+const vuetify = createVuetify()
+
 createInertiaApp({
   resolve: name => {
     const pages = import.meta.glob('./Pages/**/*.vue', { eager: true })
     return pages[`./Pages/${name}.vue`]
   },
-  title: title => title ? `${title} - Ping CRM` : 'Ping CRM',
+  title: title => title ? `${title} - Dew Asistente` : 'Dew Asistente',
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
-      .use(plugin)
-      .mount(el)
+    const app = createApp({ render: () => h(App, props) })
+    app.use(plugin)
+    app.use(vuetify)
+    app.mount(el)
   },
 })

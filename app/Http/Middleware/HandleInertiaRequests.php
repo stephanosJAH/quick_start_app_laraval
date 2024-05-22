@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Support\Facades\URL;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -32,7 +33,7 @@ class HandleInertiaRequests extends Middleware
      * @see https://inertiajs.com/shared-data
      */
     public function share(Request $request): array
-    {
+    {   
         return array_merge(parent::share($request), [
             'auth' => function () use ($request) {
                 return [
@@ -42,6 +43,7 @@ class HandleInertiaRequests extends Middleware
                         'last_name' => $request->user()->last_name,
                         'email' => $request->user()->email,
                         'owner' => $request->user()->owner,
+                        'photo' => $request->user()->photo_path ? URL::route('image', ['path' => $request->user()->photo_path, 'w' => 60, 'h' => 60, 'fit' => 'crop']) : null,
                         'account' => [
                             'id' => $request->user()->account->id,
                             'name' => $request->user()->account->name,
